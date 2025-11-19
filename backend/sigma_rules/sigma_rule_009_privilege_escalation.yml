@@ -1,0 +1,24 @@
+title: Privilege Escalation Attempts
+id: sigma-009
+status: experimental
+description: Detects attempts to escalate privileges on Linux systems
+references:
+    - https://attack.mitre.org/techniques/T1068/
+tags:
+    - attack.privilege_escalation
+    - attack.t1068
+logsource:
+    product: linux
+    service: auth
+detection:
+    selection:
+        - 'sudo'
+        - 'su -'
+        - 'setuid'
+        - 'setgid'
+    condition: selection | count(user) > 3
+falsepositives:
+    - Legitimate administrative tasks
+    - System maintenance
+level: high
+

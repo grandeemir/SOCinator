@@ -1,0 +1,25 @@
+title: Ransomware Indicators
+id: sigma-004
+status: experimental
+description: Detects common ransomware behavior patterns
+references:
+    - https://attack.mitre.org/techniques/T1486/
+tags:
+    - attack.impact
+    - attack.t1486
+logsource:
+    product: windows
+    service: file_system
+detection:
+    selection:
+        - '.encrypted'
+        - '.locked'
+        - '.crypto'
+        - 'HOW_TO_DECRYPT'
+        - 'README_TO_DECRYPT'
+    condition: selection
+falsepositives:
+    - Legitimate encryption software
+    - Backup operations
+level: critical
+

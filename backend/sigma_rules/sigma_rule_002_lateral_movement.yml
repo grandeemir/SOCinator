@@ -1,0 +1,23 @@
+title: Lateral Movement via WMI
+id: sigma-002
+status: experimental
+description: Detects lateral movement attempts using WMI (Windows Management Instrumentation)
+references:
+    - https://attack.mitre.org/techniques/T1047/
+tags:
+    - attack.lateral_movement
+    - attack.t1047
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        - 'wmic.exe'
+        - 'wmic process call create'
+        - 'Win32_Process'
+    condition: selection
+falsepositives:
+    - Legitimate system administration
+    - Remote management tools
+level: high
+

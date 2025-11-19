@@ -1,0 +1,24 @@
+title: Process Injection Detection
+id: sigma-010
+status: experimental
+description: Detects process injection techniques used by malware
+references:
+    - https://attack.mitre.org/techniques/T1055/
+tags:
+    - attack.defense_evasion
+    - attack.t1055
+logsource:
+    product: windows
+    service: sysmon
+detection:
+    selection:
+        - 'CreateRemoteThread'
+        - 'VirtualAllocEx'
+        - 'WriteProcessMemory'
+        - 'NtCreateThreadEx'
+    condition: selection
+falsepositives:
+    - Legitimate debugging tools
+    - Security software
+level: high
+

@@ -1,0 +1,25 @@
+title: Suspicious PowerShell Execution
+id: sigma-001
+status: experimental
+description: Detects suspicious PowerShell execution patterns commonly used in attacks
+references:
+    - https://attack.mitre.org/techniques/T1059/001/
+tags:
+    - attack.execution
+    - attack.t1059.001
+    - attack.defense_evasion
+    - attack.t1027
+logsource:
+    product: windows
+    service: powershell
+detection:
+    selection:
+        - 'powershell.exe'
+        - 'powershell_ise.exe'
+        - 'pwsh.exe'
+    condition: selection
+falsepositives:
+    - Legitimate PowerShell scripts
+    - Administrative tasks
+level: high
+

@@ -1,0 +1,26 @@
+title: Web Shell Upload Detection
+id: sigma-005
+status: experimental
+description: Detects potential web shell uploads to web servers
+references:
+    - https://attack.mitre.org/techniques/T1505/003/
+tags:
+    - attack.persistence
+    - attack.t1505.003
+logsource:
+    product: web
+    service: access
+detection:
+    selection:
+        - 'cmd.php'
+        - 'shell.php'
+        - 'c99.php'
+        - 'eval('
+        - 'base64_decode'
+        - 'system('
+    condition: selection
+falsepositives:
+    - Legitimate PHP scripts
+    - Development environments
+level: high
+

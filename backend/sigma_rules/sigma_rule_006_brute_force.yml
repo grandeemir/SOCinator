@@ -1,0 +1,23 @@
+title: Brute Force Attack Detection
+id: sigma-006
+status: experimental
+description: Detects multiple failed login attempts indicating brute force attacks
+references:
+    - https://attack.mitre.org/techniques/T1110/
+tags:
+    - attack.credential_access
+    - attack.t1110
+logsource:
+    product: linux
+    service: auth
+detection:
+    selection:
+        - 'Failed password'
+        - 'authentication failure'
+        - 'Invalid user'
+    condition: selection | count(user) > 5
+falsepositives:
+    - Legitimate user errors
+    - Password reset attempts
+level: medium
+

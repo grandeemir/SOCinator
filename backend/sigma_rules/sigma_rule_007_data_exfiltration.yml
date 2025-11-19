@@ -1,0 +1,23 @@
+title: Data Exfiltration via Network
+id: sigma-007
+status: experimental
+description: Detects large data transfers that may indicate exfiltration
+references:
+    - https://attack.mitre.org/techniques/T1041/
+tags:
+    - attack.exfiltration
+    - attack.t1041
+logsource:
+    product: network
+    service: firewall
+detection:
+    selection:
+        - 'bytes_sent > 100000000'
+        - 'large_transfer'
+        - 'data_exfiltration'
+    condition: selection
+falsepositives:
+    - Legitimate backups
+    - Large file transfers
+level: medium
+

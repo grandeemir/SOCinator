@@ -1,0 +1,24 @@
+title: Suspicious Scheduled Task Creation
+id: sigma-008
+status: experimental
+description: Detects creation of suspicious scheduled tasks for persistence
+references:
+    - https://attack.mitre.org/techniques/T1053/005/
+tags:
+    - attack.execution
+    - attack.persistence
+    - attack.t1053.005
+logsource:
+    product: windows
+    service: task_scheduler
+detection:
+    selection:
+        - 'schtasks /create'
+        - 'powershell.exe'
+        - 'cmd.exe /c'
+    condition: selection
+falsepositives:
+    - Legitimate automation scripts
+    - System maintenance tasks
+level: medium
+
